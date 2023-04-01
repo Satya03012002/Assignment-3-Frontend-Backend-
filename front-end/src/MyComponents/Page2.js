@@ -17,7 +17,7 @@ function Page2() {
             
             console.log("id", id)
 
-          const res = await axios.get(`http://localhost:5000/signin/${id}`);
+          const res = await axios.get(`http://localhost:8000/signin/${id}`);
           
           const data = await res.data;
          
