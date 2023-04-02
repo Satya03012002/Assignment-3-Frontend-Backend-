@@ -18,6 +18,11 @@ function Card(props) {
     
       
     }
+
+    const handleDelete = () => {
+        props.onDelete(props.email);
+      };
+    
     // const navigate = useNavigate();
     // const handleDelete = async()=>{
     //     const data = await deletedata();
@@ -56,7 +61,7 @@ function Card(props) {
           <MDBCardBody> 
           <MDBBtn color='light' rippleColor='dark' style={{marginRight:"50px"}} onClick={handleClick}>{ check ? <MDBIcon style={{color: "red"}} far icon="heart" />:<MDBIcon style={{color: "red"}} fas icon="heart" /> }</MDBBtn>
           <MDBBtn color='light' rippleColor='dark' style={{marginRight:"50px"}}><MDBIcon far icon="edit" /></MDBBtn>
-          <MDBBtn color='light' rippleColor='dark' style={{marginRight:"50px"}} ><MDBIcon fas icon="trash" /></MDBBtn>
+          <MDBBtn color='light' rippleColor='dark' style={{marginRight:"50px"}} onClick={handleDelete}><MDBIcon fas icon="trash" /></MDBBtn>
           </MDBCardBody>
         </MDBCard>
       </MDBCol>

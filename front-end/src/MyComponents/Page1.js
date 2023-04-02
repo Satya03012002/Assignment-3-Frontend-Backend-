@@ -40,12 +40,16 @@ function  Page1() {
 
 
     const navigate = useNavigate();
-    // const handleDelete = async()=>{
-        
-    //     await navigate("/");
+    const handleDelete = async(email)=>{
+      // boxdata.indexOf()
+      //   await navigate("/");
+      //   console.log("hello")
+
+      setboxdata(boxdata.filter(obj => obj.email !== email));
+      //setboxdata(data.map((obj)=>({...obj,})))
        
   
-    //   }
+      }
 
 
     useEffect(() => {
@@ -67,7 +71,7 @@ function  Page1() {
     
     {boxdata.map((image)=>{
       
-        return<> <Card username = {image.username}  src=  {`https://avatars.dicebear.com/v2/avataaars/${image.username}.svg?options[mood][]=happy`} email = {image.email} phone = {image.phone} website =  {image.website} />
+        return<> <Card username = {image.username}  src=  {`https://avatars.dicebear.com/v2/avataaars/${image.username}.svg?options[mood][]=happy`} email = {image.email} phone = {image.phone} website =  {image.website} onDelete = {handleDelete}/>
      </>
     })}
 
