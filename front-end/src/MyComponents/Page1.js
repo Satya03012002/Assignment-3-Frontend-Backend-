@@ -1,119 +1,117 @@
- import React, {useState} from 'react'
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Card from 'react-bootstrap/Card';
-// import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+import React, {useEffect, useState} from 'react'
 import axios from "axios"
-import { useNavigate } from "react-router-dom";
-import validator from 'validator'
+import {MDBCard,MDBCardImage,MDBCardBody,MDBCardTitle,MDBCardText,MDBRow,MDBCol,MDBIcon,MDBBtn} from 'mdb-react-ui-kit';
+import Card from './Card';
 
-function Page1() {
-    const navigate = useNavigate();
+import { useNavigate } from 'react-router-dom';
 
-    const [values, setValues] = useState({
-        email: "",
-        password: "",
-        confirmPassword: "",
-        text:""
-      });
-    
-      const validateEmail = (email) => {
-        if (validator.isEmail(email)) {
-            console.log("true")
-            return true
-          } else {
-            return false
-          }
-    
-      }
+function  Page1() {
+ 
+    const[boxdata, setboxdata] = useState([])
+
    
-    const handleUser = (e) =>{
-      const { name, value } = e.target;
-      setValues({...values, [name]:value})
+
     
-    }
+    const getImageUrl = async()=>{
+       
+            try{
+            
     
-    const sendRequest= async()=>{
-      try{
-        const res = await axios.post(`http://localhost:8000/signin`, values)
-        
-        const data = await res.data;
-        return data;
-    
-      }catch(err){
-        alert(err)
-      }
-    
-    }
-    
-    
-    const handleSubmit = async(e)=>{
-      e.preventDefault();
-      if(validateEmail(values.email)){
-        console.log("emailformat checked")
-        
-      }else{
-        alert("invalid email")
-        return
-      }
-      
-      try{
-      const data = await sendRequest();
-      console.log("userId", data.data._id);
-      if(data){
-        console.log("data -->" ,data)
-        await localStorage.setItem("userId", data.data._id)
-        navigate("/data")
-      }else{
-        alert("invalid input")
-      }
-    
-    
-      }catch(err){
-        alert("invalid details")
-      }
-    }
-    
-      return (
-        <>
-          <Card style={{ width: '18rem', margin:'auto' }}>
-    
-            <Form>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" name="email" onChange={handleUser} />
-    
-              </Form.Group>
-    
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" name="password" onChange={handleUser} />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="confirmPassword" name="confirmPassword" onChange={handleUser}/>
-              </Form.Group>
+              const res = await axios.get(`https://jsonplaceholder.typicode.com/users`);
               
-    
-                <Card.Text>
-                <div class="form-group" style={{padding:"5px"}}>
-                  <label for="exampleFormControlTextarea1">enter text</label>
-                  <textarea class="form-control" name="text" rows="3" onChange={handleUser}></textarea>
-                </div>
-                </Card.Text>
-    
-              
-    
-              <Button  variant="primary" type="submit" onClick={handleSubmit}>
-                Submit
-              </Button>
-            </Form>
+              const data = await res.data;
+              //console.log(data)
+
+              // data.map((obj)=>{setboxdata([...boxdata,obj])})
+             setboxdata(data.map((obj)=>({...obj,})))
+              if(data){
+                   console.log("data")
+                  console.log(boxdata)
+              }
           
-         
-        </Card>
+            }catch(err){
+              alert(err)
+            }
+
+
+    }
+    console.log(boxdata.length)
+
+
+    const navigate = useNavigate();
+    // const handleDelete = async()=>{
         
-        </>
-      );
+    //     await navigate("/");
+       
+  
+    //   }
+
+
+    useEffect(() => {
+        const subscribe = () => {
+            getImageUrl();
+
+
+        }
+        return subscribe();
+
+        //getImageUrl();
+
+    }, []);
+
+  return (
+    <div >
+    
+    <MDBRow className='row-cols-1 row-cols-md-3 g-4' style={{margin :"auto auto"}}>
+    
+    {boxdata.map((image)=>{
+      
+        return<> <Card username = {image.username}  src=  {`https://avatars.dicebear.com/v2/avataaars/${image.username}.svg?options[mood][]=happy`} email = {image.email} phone = {image.phone} website =  {image.website} />
+     </>
+    })}
+
+   
+    </MDBRow>  
+    </div>
+  )
 }
 
-export default Page1
+export default  Page1
+//<MDBIcon fas icon="heart" />
+//<MDBIcon far icon="heart" />
+//<MDBIcon far icon="heart" />
+//<MDBIcon fas icon="heart" />
+
+//<MDBIcon fas icon="heart" />
+
+
+
+// <MDBCol>
+// <MDBCard>
+//   <MDBCardImage
+//     src=  {`https://avatars.dicebear.com/v2/avataaars/${image.username}.svg?options[mood][]=happy`}
+//     alt='...'
+//     position='top'
+//   />
+//      {/* <MailOutlineIcon/> */}
+//   <MDBCardBody>
+//     <MDBCardTitle>{image.username}</MDBCardTitle>
+ 
+//     <MDBCardText>
+//     <MDBIcon far icon="envelope" /> {image.email}
+//     </MDBCardText>
+//     <MDBCardText>
+//     <MDBIcon fas icon="phone" /> {image.phone}
+//     </MDBCardText>
+//     <MDBCardText>
+//     <MDBIcon fas icon="globe" />  {image.website}
+//     </MDBCardText>
+//   </MDBCardBody>
+//   <MDBCardBody> 
+//   <MDBBtn color='light' rippleColor='dark' style={{marginRight:"50px"}} onClick={handleClick}>{ check ? <MDBIcon style={{color: "red"}} far icon="heart" />:<MDBIcon style={{color: "red"}} fas icon="heart" /> }</MDBBtn>
+//   <MDBBtn color='light' rippleColor='dark' style={{marginRight:"50px"}}><MDBIcon far icon="edit" /></MDBBtn>
+//   <MDBBtn color='light' rippleColor='dark' style={{marginRight:"50px"}}><MDBIcon fas icon="trash" /></MDBBtn>
+//   </MDBCardBody>
+// </MDBCard>
+// </MDBCol>
