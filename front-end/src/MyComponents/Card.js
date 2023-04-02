@@ -58,11 +58,11 @@ function Card(props) {
             <MDBIcon fas icon="globe" />  {props.website}
             </MDBCardText>
           </MDBCardBody>
-          <MDBCardBody> 
-          <MDBBtn color='light' rippleColor='dark' style={{marginRight:"50px"}} onClick={handleClick}>{ check ? <MDBIcon style={{color: "red"}} far icon="heart" />:<MDBIcon style={{color: "red"}} fas icon="heart" /> }</MDBBtn>
-          <MDBBtn color='light' rippleColor='dark' style={{marginRight:"50px"}}><MDBIcon far icon="edit" /></MDBBtn>
-          <MDBBtn color='light' rippleColor='dark' style={{marginRight:"50px"}} onClick={handleDelete}><MDBIcon fas icon="trash" /></MDBBtn>
-          </MDBCardBody>
+          <MDBRow>
+          <MDBCol><MDBBtn color='light' rippleColor='dark'  onClick={handleClick}>{ check ? <MDBIcon style={{color: "red"}} far icon="heart" />:<MDBIcon style={{color: "red"}} fas icon="heart" /> }</MDBBtn></MDBCol>
+          <MDBCol><MDBBtn color='light' rippleColor='dark' ><MDBIcon far icon="edit" /></MDBBtn></MDBCol>
+          <MDBCol><MDBBtn color='light' rippleColor='dark'  onClick={handleDelete}><MDBIcon fas icon="trash" /></MDBBtn></MDBCol>
+          </MDBRow>
         </MDBCard>
       </MDBCol>
 
