@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from 'react'
 import axios from "axios"
 import {MDBCard,MDBCardImage,MDBCardBody,MDBCardTitle,MDBCardText,MDBRow,MDBCol,MDBIcon,MDBBtn} from 'mdb-react-ui-kit';
+import Popupform from './Popupform';
 
 function Card(props) {
 
 
 
     const [check, setcheck] = useState(true); 
-    const [trash, settrash] = useState(true);
+    const [edit, setedit] = useState(false);
+
 
     const handleClick = () => {
         if(check){
@@ -18,6 +20,27 @@ function Card(props) {
     
       
     }
+    const handleEdit = () => {
+        // if(check){
+        //     setedit(false);
+        // }else{
+        //     setedit(true); 
+        // }
+        setedit(true); 
+    
+      
+    }
+    const handleClose = () => {
+        // if(check){
+        //     setedit(false);
+        // }else{
+        //     setedit(true); 
+        // }
+        setedit(false); 
+    
+      
+    }
+
 
     const handleDelete = () => {
         props.onDelete(props.email);
@@ -60,7 +83,7 @@ function Card(props) {
           </MDBCardBody>
           <MDBRow>
           <MDBCol><MDBBtn color='light' rippleColor='dark'  onClick={handleClick}>{ check ? <MDBIcon style={{color: "red"}} far icon="heart" />:<MDBIcon style={{color: "red"}} fas icon="heart" /> }</MDBBtn></MDBCol>
-          <MDBCol><MDBBtn color='light' rippleColor='dark' ><MDBIcon far icon="edit" /></MDBBtn></MDBCol>
+          <MDBCol><MDBBtn color='light' rippleColor='dark' ><MDBIcon far icon="edit" onClick={handleEdit}/><Popupform trigger = {edit} onClose= {handleClose}/></MDBBtn></MDBCol>
           <MDBCol><MDBBtn color='light' rippleColor='dark'  onClick={handleDelete}><MDBIcon fas icon="trash" /></MDBBtn></MDBCol>
           </MDBRow>
         </MDBCard>
