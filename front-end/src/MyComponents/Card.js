@@ -50,7 +50,7 @@ function Card(props) {
         <MDBCol>
         <MDBCard>
           <MDBCardImage
-            src=  {`https://avatars.dicebear.com/v2/avataaars/${props.username}.svg?options[mood][]=happy`}
+            src=  {props.src}
             alt='...'
             position='top'
           />

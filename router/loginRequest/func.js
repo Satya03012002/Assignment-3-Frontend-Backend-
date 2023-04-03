@@ -3,13 +3,15 @@ import LoginData from '../../schema/login.js';
 
 export const signIn = async(req,res)=>{
     try{
-        const {email,password,confirmPassword,text} = req.body;
+        const {email,password,confirmPassword,id,username,name,phone,website} = req.body;
+
+        console.log(req.body)
         console.log(req.body)
         if(password == confirmPassword){
             const hashPassword = await bcrypt.hash(password,10);
             const result = await LoginData.findOne({email});
             if(!result){
-                const data = await  new LoginData({email,password:hashPassword,confirmPassword, text});
+                const data = await  new LoginData({email,password:hashPassword,confirmPassword,id,username,name,phone,website});
                 await data.save();
                 
                 console.log("signUp successfully");
@@ -29,15 +31,18 @@ export const signIn = async(req,res)=>{
     
 
 }
+
+
+
 export const getdata = async(req,res)=>{
-    const id = req.params.id;
-    console.log(id)
+  
+   
     try{
 
-        const data = await LoginData.findById(id)
+        const data = await LoginData.find({})
         if(data){
-            const {email,text} = data
-            res.status(200).json({email,text});
+          
+            res.status(200).json(data);
         }else{
             res.status(404).json({"message" :" not found"});  
         }

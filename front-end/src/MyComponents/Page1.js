@@ -19,7 +19,7 @@ function  Page1() {
             try{
             
     
-              const res = await axios.get(`https://jsonplaceholder.typicode.com/users`);
+              const res = await axios.get(`http://localhost:8000/signin/data`);//https://jsonplaceholder.typicode.com/users
               
               const data = await res.data;
               //console.log(data)
@@ -68,7 +68,7 @@ function  Page1() {
     
     {boxdata.map((image)=>{
       
-        return<> <Card username = {image.username}  src=  {`https://avatars.dicebear.com/v2/avataaars/${image.username}.svg?options[mood][]=happy`} email = {image.email} phone = {image.phone} website =  {image.website} onDelete={handleDelete}/>
+        return<> <Card username = {image.name}  src=  {`https://avatars.dicebear.com/v2/avataaars/${image.username}.svg?options[mood][]=happy`} email = {image.email} phone = {image.phone} website =  {image.website} onDelete={handleDelete}/>
      </>
     })}
 
@@ -79,40 +79,3 @@ function  Page1() {
 }
 
 export default  Page1
-//<MDBIcon fas icon="heart" />
-//<MDBIcon far icon="heart" />
-//<MDBIcon far icon="heart" />
-//<MDBIcon fas icon="heart" />
-
-//<MDBIcon fas icon="heart" />
-
-
-
-// <MDBCol>
-// <MDBCard>
-//   <MDBCardImage
-//     src=  {`https://avatars.dicebear.com/v2/avataaars/${image.username}.svg?options[mood][]=happy`}
-//     alt='...'
-//     position='top'
-//   />
-//      {/* <MailOutlineIcon/> */}
-//   <MDBCardBody>
-//     <MDBCardTitle>{image.username}</MDBCardTitle>
- 
-//     <MDBCardText>
-//     <MDBIcon far icon="envelope" /> {image.email}
-//     </MDBCardText>
-//     <MDBCardText>
-//     <MDBIcon fas icon="phone" /> {image.phone}
-//     </MDBCardText>
-//     <MDBCardText>
-//     <MDBIcon fas icon="globe" />  {image.website}
-//     </MDBCardText>
-//   </MDBCardBody>
-//   <MDBCardBody> 
-//   <MDBBtn color='light' rippleColor='dark' style={{marginRight:"50px"}} onClick={handleClick}>{ check ? <MDBIcon style={{color: "red"}} far icon="heart" />:<MDBIcon style={{color: "red"}} fas icon="heart" /> }</MDBBtn>
-//   <MDBBtn color='light' rippleColor='dark' style={{marginRight:"50px"}}><MDBIcon far icon="edit" /></MDBBtn>
-//   <MDBBtn color='light' rippleColor='dark' style={{marginRight:"50px"}}><MDBIcon fas icon="trash" /></MDBBtn>
-//   </MDBCardBody>
-// </MDBCard>
-// </MDBCol>
