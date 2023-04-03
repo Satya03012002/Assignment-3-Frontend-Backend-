@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react'
 import axios from "axios"
 import {MDBCard,MDBCardImage,MDBCardBody,MDBCardTitle,MDBCardText,MDBRow,MDBCol,MDBIcon,MDBBtn} from 'mdb-react-ui-kit';
 import Card from './Card';
+import Popup from 'reactjs-popup';
 
 import { useNavigate } from 'react-router-dom';
 
