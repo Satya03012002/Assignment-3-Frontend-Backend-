@@ -12,6 +12,11 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use("/signin",SignInRouter);
 
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 // seving thee frontend
 
 app.use(express.static(path.join(__dirname,"./client/build")))
@@ -22,6 +27,8 @@ app.get("*", function(_,res){
         }
     )
 })
+
+console.log(__dirname);
 
 app.listen(PORT,()=>{
     console.log(`server running successfully on PORT : ${PORT}`)
