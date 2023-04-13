@@ -1,4 +1,5 @@
-# Mern Stack Application
+# Contact List
+Mern stack application 
 
 UI than has information 
 
